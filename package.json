@@ -1,0 +1,29 @@
+{
+  "name": "whosthehost",
+  "version": "1.0.0",
+  "description": "get to know who is the host",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node ./index.js",
+    "dev": "nodemon ./index.js localhost 8080"
+  },
+  "repository": "git+https://eddie-lim@github.com/eddie-lim/whosthehost.git",
+  "author": "eddielimofficial@gmail.com",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/eddie-lim/whosthehost/issues"
+  },
+  "homepage": "https://github.com/eddie-lim/whosthehost#readme",
+  "dependencies": {
+    "axios": "^0.27.2",
+    "dotenv": "^16.0.1",
+    "express": "^4.18.1",
+    "mysql": "^2.18.1",
+    "node-cron": "^3.0.1",
+    "uuid": "^8.3.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.19"
+  }
+}
