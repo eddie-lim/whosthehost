@@ -11,7 +11,6 @@ async function selectHost(channel_id) {
         await repo.UpdateAllChannelIsActive(channel_id, 1)
         channel_members = await getChannelMembers(channel_id)
     }
-    logger.Info("channel_member", "selectHost", "eligible channel members: " + JSON.stringify(channel_members));
     processChannelMembers(channel_members)
 }
 
@@ -29,6 +28,8 @@ async function getChannelMembers(channel_id){
             "name": channel_member.channel_name,
             "hook_base_url": channel_member.hook_base_url,
             "hook_path": channel_member.hook_path,
+            "is_fortnightly": channel_member.is_fortnightly,
+            "is_fortnightly_even_week": channel_member.is_fortnightly_even_week,
             "members" : [
                 {
                     "id": channel_member.member_id,
@@ -50,9 +51,10 @@ async function getChannelMembers(channel_id){
 /// when a member is picked, the webhook will be called and the channel_members.is_active is updated to false
 function processChannelMembers(channel_members) {
     for (const [channel_id, channel_member] of Object.entries(channel_members)) {
-        if (channel_member.is_fortnightly && WeekNumber % 2 != 0){
+        if (channel_member.is_fortnightly && ((channel_member.is_fortnightly_even_week && helper.WeekNumber() % 2 != 0) || (!channel_member.is_fortnightly_even_week && helper.WeekNumber() % 2 == 0))){
             continue
         }
+        logger.Info("channel_member", "selectHost", "eligible channel members: " + JSON.stringify(channel_members));
         let random_member = channel_member.members[Math.floor(Math.random()*channel_member.members.length)];
         capitalized_name = helper.CapitalizeFirstLetter(random_member.name)
         client.Hook(channel_member.hook_base_url, channel_member.hook_path, capitalized_name, random_member.messenger_user_id)
