@@ -25,14 +25,15 @@ _Ease of use_
   - manage which member is in which channels
 
 # Deployment (AWS)
-1. Deploy an Ubuntu EC2 instance
-2. Follow this [guide](https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/setting-up-node-on-ec2-instance.html) to install NodeJS
-3. Follow this [guide](https://towardsdatascience.com/running-mysql-databases-on-aws-ec2-a-tutorial-for-beginners-4301faa0c247) to install MySQL
-4. Use SFTP to upload your files to your server
-5. Install PM2
+1. Duplicate `.env.dist` and rename to just `.env`, populate the values inside accordingly
+2. Deploy an Ubuntu EC2 instance
+3. Follow this [guide](https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/setting-up-node-on-ec2-instance.html) to install NodeJS
+4. Follow this [guide](https://towardsdatascience.com/running-mysql-databases-on-aws-ec2-a-tutorial-for-beginners-4301faa0c247) to install MySQL
+5. Use SFTP to upload your files to your server
+6. Install PM2
   - `npm install pm2 -g`
-6. Start your service via PM2 to have it running in background
+7. Start your service via PM2 to have it running in background
   - `pm2 start index.js`
-7. Check your nodejs service
+8. Check your nodejs service
   - `pm2 list`
   - `pm2 log`
