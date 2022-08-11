@@ -1,6 +1,7 @@
 const repo = require("../repository/channel_member")
 const client = require("../client/handler");
 const helper = require("../utils/helper");
+const logger = require("../repository/system_logs")
 
 // selectHost will get all available members in a channel
 // and randomly pick a member as the host
@@ -48,8 +49,10 @@ function processChannelMembers(channel_members) {
     for (const [channel_id, channel_member] of Object.entries(channel_members)) {
         let random_member = channel_member.members[Math.floor(Math.random()*channel_member.members.length)];
         capitalized_name = helper.CapitalizeFirstLetter(random_member.name)
-        client.Hook(channel_member.hook_base_url, channel_member.hook_path, capitalized_name, channel_member.messenger_user_id)
+        client.Hook(channel_member.hook_base_url, channel_member.hook_path, capitalized_name, random_member.messenger_user_id)
         repo.UpdateIsActive(channel_id, random_member.id, 0)
+
+        logger.Info("channel_member", "processChannelMembers", "select random member as host for" + channel_member.name + " : " + JSON.stringify(random_member));
     }
 }
 

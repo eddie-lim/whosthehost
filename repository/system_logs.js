@@ -8,7 +8,7 @@ const pool = mysql.createPool({
     database: process.env.DB_DATABASE
 })
 
-// read is the READ operation that retrieves a specific channel and the linked members from `channel_members` table
+// createLog is the CREATE operation that inserts a log into the `system_log` table
 function createLog(class_name, method, type, log) {
     return new Promise(function(resolve, error) {
         pool.getConnection(function(err, connection) {
@@ -20,7 +20,6 @@ function createLog(class_name, method, type, log) {
                 INSERT INTO 
                     whosthehost.system_logs (class, method, type, log) 
                 VALUES (?, ?, ?, ?);
-            ;
             `, [class_name, method, type, log], (err, rows) => {
                 connection.release();
                 if (err) error(err)
@@ -31,7 +30,10 @@ function createLog(class_name, method, type, log) {
 }
 
 module.exports = {
-    CreateLog: function(class_name, method, type, log){
-        createLog(class_name, method, type, log)
-    }
+    Info: function(class_name, method, log){
+        createLog(class_name, method, "info", log)
+    },
+    Error: function(class_name, method, log){
+        createLog(class_name, method, "error", log)
+    },
 }

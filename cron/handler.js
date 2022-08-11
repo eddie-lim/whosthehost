@@ -8,7 +8,7 @@ async function setup() {
     channels = await repo.ReadAll()
     channels.filter(channel => channel.is_active).forEach(channel => {
         cron.schedule(channel.cron_expression, () => {
-            logger.CreateLog("cron", "setup", "info", "invoking webhook: Selecting a random host for channel " + channel.name);
+            logger.Info("cron", "webhook", "invoking webhook: Selecting a random host for channel " + channel.name);
             CM.SelectHost(channel.id);
           });
     });
