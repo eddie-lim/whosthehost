@@ -9,6 +9,7 @@ async function selectHost(channel_id) {
     channel_members = await getChannelMembers(channel_id)
     if (Object.keys(channel_members).length == 0){
         repo.UpdateAllChannelIsActive(channel_id, 1)
+        channel_members = await getChannelMembers(channel_id)
     }
     processChannelMembers(channel_members)
 }
@@ -30,7 +31,8 @@ async function getChannelMembers(channel_id){
             "members" : [
                 {
                     "id": channel_member.member_id,
-                    "name": channel_member.member_name
+                    "name": channel_member.member_name,
+                    "messenger_user_id": channel_member.messenger_user_id
                 }
             ]
         }
