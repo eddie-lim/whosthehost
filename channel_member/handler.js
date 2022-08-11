@@ -6,11 +6,12 @@ const logger = require("../repository/system_logs")
 // selectHost will get all available members in a channel
 // and randomly pick a member as the host
 async function selectHost(channel_id) {
-    channel_members = await getChannelMembers(channel_id)
+    let channel_members = await getChannelMembers(channel_id)
     if (Object.keys(channel_members).length == 0){
-        repo.UpdateAllChannelIsActive(channel_id, 1)
+        await repo.UpdateAllChannelIsActive(channel_id, 1)
         channel_members = await getChannelMembers(channel_id)
     }
+    logger.Info("channel_member", "selectHost", "eligible channel members: " + JSON.stringify(channel_members));
     processChannelMembers(channel_members)
 }
 
@@ -18,7 +19,7 @@ async function selectHost(channel_id) {
 // filters away the non-active statuses
 // returns a mapped channels with members data populated in each channel object
 async function getChannelMembers(channel_id){
-    channel_members = await repo.Read(channel_id)
+    let channel_members = await repo.Read(channel_id)
 
     let channels = {}
 

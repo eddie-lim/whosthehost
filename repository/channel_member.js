@@ -1,4 +1,5 @@
 // This is the CRUD class for `channel_member` table
+const logger = require("../repository/system_logs")
 const mysql = require('mysql')
 const pool = mysql.createPool({
     host: process.env.DB_HOST,
@@ -40,7 +41,10 @@ function read(channel_id) {
                     A.channel_id = ?;
             `, [channel_id], (err, rows) => {
                 connection.release();
-                if (err) error(err)
+                if (err){
+                    logger.Error("client", "hook", "failed to query for channel_members: " + JSON.stringify(err));
+                    error(err)
+                }
                 resolve(rows)
             })
         })
@@ -63,8 +67,10 @@ function updateIsActive(channel_id, member_id, is_active) {
                     channel_id = ? and member_id = ?;
             `, [is_active, channel_id, member_id], (err, result) => {
                 connection.release();
-                if (err) error(err)
-                // console.log(result.affectedRows + " record(s) updated");
+                if (err){
+                    logger.Error("client", "hook", "failed to query for channel_members: " + JSON.stringify(err));
+                    error(err)
+                }
                 resolve(result)
             })
         })
@@ -87,8 +93,10 @@ function updateAllChannelIsActive(channel_id, is_active) {
                     channel_id = ?;
             `, [is_active, channel_id], (err, result) => {
                 connection.release();
-                if (err) error(err)
-                // console.log(result.affectedRows + " record(s) updated");
+                if (err){
+                    logger.Error("client", "hook", "failed to query for channel_members: " + JSON.stringify(err));
+                    error(err)
+                }
                 resolve(result)
             })
         })
