@@ -3,8 +3,9 @@ const app = express()
 require('dotenv').config()
 const CM = require("./channel_member/handler")
 const cron_handler = require("./cron/handler")
+const logger = require("../repository/system_logs")
 
-console.log("started")
+logger.Info("index", "index", "nodejs server started");
 cron_handler.Setup()
 
 // --

@@ -13,8 +13,8 @@ const pool = mysql.createPool({
 function read(channel_id) {
     return new Promise(function(resolve, error) {
         pool.getConnection(function(err, connection) {
-            if(err) { 
-              console.log(err); 
+            if(err) {
+              logger.Error("channel_member", "read", "failed to getConnection for read channel_members: " + JSON.stringify(err));
               return; 
             }
             connection.query(`
@@ -44,7 +44,7 @@ function read(channel_id) {
             `, [channel_id], (err, rows) => {
                 connection.release();
                 if (err){
-                    logger.Error("client", "hook", "failed to query for channel_members: " + JSON.stringify(err));
+                    logger.Error("channel_member", "read", "failed to query read for channel_members: " + JSON.stringify(err));
                     error(err)
                 }
                 resolve(rows)
@@ -57,8 +57,8 @@ function read(channel_id) {
 function updateIsActive(channel_id, member_id, is_active) {
     return new Promise(function(resolve, error) {
         pool.getConnection(function(err, connection) {
-            if(err) { 
-              console.log(err); 
+            if(err) {
+              logger.Error("channel_member", "updateIsActive", "failed to getConnection for updateIsActive channel_members: " + JSON.stringify(err));
               return; 
             }
             connection.query(`
@@ -70,7 +70,7 @@ function updateIsActive(channel_id, member_id, is_active) {
             `, [is_active, channel_id, member_id], (err, result) => {
                 connection.release();
                 if (err){
-                    logger.Error("client", "hook", "failed to query for channel_members: " + JSON.stringify(err));
+                    logger.Error("channel_member", "updateIsActive", "failed to query updateIsActive for channel_members: " + JSON.stringify(err));
                     error(err)
                 }
                 resolve(result)
@@ -83,8 +83,8 @@ function updateIsActive(channel_id, member_id, is_active) {
 function updateAllChannelIsActive(channel_id, is_active) {
     return new Promise(function(resolve, error) {
         pool.getConnection(function(err, connection) {
-            if(err) { 
-              console.log(err); 
+            if(err) {
+              logger.Error("channel_member", "updateAllChannelIsActive", "failed to getConnection for updateAllChannelIsActive channel_members: " + JSON.stringify(err));
               return; 
             }
             connection.query(`
@@ -96,7 +96,7 @@ function updateAllChannelIsActive(channel_id, is_active) {
             `, [is_active, channel_id], (err, result) => {
                 connection.release();
                 if (err){
-                    logger.Error("client", "hook", "failed to query for channel_members: " + JSON.stringify(err));
+                    logger.Error("channel_member", "updateAllChannelIsActive", "failed to query updateAllChannelIsActive for channel_members: " + JSON.stringify(err));
                     error(err)
                 }
                 resolve(result)

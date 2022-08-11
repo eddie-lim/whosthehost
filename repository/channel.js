@@ -12,8 +12,8 @@ const pool = mysql.createPool({
 function readAll() {
     return new Promise(function(resolve, error) {
         pool.getConnection(function(err, connection) {
-            if(err) { 
-              console.log(err); 
+            if(err) {
+              logger.Error("channel", "readAll", "failed to getConnection for readAll channel: " + JSON.stringify(err));
               return; 
             }
             connection.query(`
@@ -23,7 +23,10 @@ function readAll() {
                 whosthehost.channel AS A;
             `, (err, rows) => {
                 connection.release();
-                if (err) error(err)
+                if (err) {
+                    logger.Error("channel", "readAll", "failed to query for readAll channel: " + JSON.stringify(err));
+                    error(err)
+                }
                 resolve(rows)
             })
         })

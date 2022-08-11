@@ -12,7 +12,7 @@ const pool = mysql.createPool({
 function createLog(class_name, method, type, log) {
     return new Promise(function(resolve, error) {
         pool.getConnection(function(err, connection) {
-            if(err) { 
+            if(err) {
               console.log(err); 
               return; 
             }
@@ -26,6 +26,8 @@ function createLog(class_name, method, type, log) {
                 resolve(rows)
             })
         })
+
+        console.log(class_name, method, type, log); 
     });
 }
 
