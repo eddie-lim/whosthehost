@@ -4,6 +4,7 @@ const CM = require("./../channel_member/handler")
 const cron = require('node-cron');
 
 async function setup() {
+    console.log("setting up~")
     channels = await repo.ReadAll()
     channels.filter(channel => channel.is_active).forEach(channel => {
         cron.schedule(channel.cron_expression, () => {
@@ -11,6 +12,7 @@ async function setup() {
             CM.SelectHost(channel.id);
           });
     });
+    console.log("setup done")
 }
 
 module.exports = {

@@ -48,7 +48,7 @@ function processChannelMembers(channel_members) {
     for (const [channel_id, channel_member] of Object.entries(channel_members)) {
         let random_member = channel_member.members[Math.floor(Math.random()*channel_member.members.length)];
         capitalized_name = helper.CapitalizeFirstLetter(random_member.name)
-        client.Hook(channel_member.hook_base_url, channel_member.hook_path, capitalized_name)
+        client.Hook(channel_member.hook_base_url, channel_member.hook_path, capitalized_name, channel_member.messenger_user_id)
         repo.UpdateIsActive(channel_id, random_member.id, 0)
     }
 }

@@ -1,10 +1,11 @@
 const axios = require('axios');
 
-function hook(base_url, path, member_name) {
+function hook(base_url, path, member_name, messenger_user_id) {
     url = base_url + "/" + path
     // url = process.env.HOOK_URL
     axios.post(url, {
-        test: member_name
+        name: member_name,
+        messenger_user_id: messenger_user_id
     })
     .then(function (response) {
         console.log("res", response.statusText);
@@ -15,7 +16,7 @@ function hook(base_url, path, member_name) {
 }
 
 module.exports = {
-    Hook: function (base_url, path, member_name){
-        return hook(base_url, path, member_name)
+    Hook: function (base_url, path, member_name, messenger_user_id){
+        return hook(base_url, path, member_name, messenger_user_id)
     }
 }

@@ -4,6 +4,7 @@ require('dotenv').config()
 const CM = require("./channel_member/handler")
 const cron_handler = require("./cron/handler")
 
+console.log("started")
 cron_handler.Setup()
 
 // --

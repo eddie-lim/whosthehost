@@ -27,6 +27,7 @@ function read(channel_id) {
                     B.hook_path,
                     B.is_active AS 'is_channel_active',
                     C.id AS 'member_id',
+                    C.messenger_user_id,
                     C.name AS 'member_name',
                     C.is_active AS 'is_member_active'
                 FROM
