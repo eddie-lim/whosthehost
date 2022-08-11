@@ -50,12 +50,15 @@ async function getChannelMembers(channel_id){
 /// when a member is picked, the webhook will be called and the channel_members.is_active is updated to false
 function processChannelMembers(channel_members) {
     for (const [channel_id, channel_member] of Object.entries(channel_members)) {
+        if (channel_member.is_fortnightly && WeekNumber % 2 != 0){
+            continue
+        }
         let random_member = channel_member.members[Math.floor(Math.random()*channel_member.members.length)];
         capitalized_name = helper.CapitalizeFirstLetter(random_member.name)
         client.Hook(channel_member.hook_base_url, channel_member.hook_path, capitalized_name, random_member.messenger_user_id)
         repo.UpdateIsActive(channel_id, random_member.id, 0)
 
-        logger.Info("channel_member", "processChannelMembers", "select random member as host for" + channel_member.name + " : " + JSON.stringify(random_member));
+        logger.Info("channel_member", "processChannelMembers", "select random member as host for " + channel_member.name + " : " + JSON.stringify(random_member));
     }
 }
 

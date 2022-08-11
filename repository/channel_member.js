@@ -26,6 +26,7 @@ function read(channel_id) {
                     B.cron_expression,
                     B.hook_base_url,
                     B.hook_path,
+                    B.is_fortnightly,
                     B.is_active AS 'is_channel_active',
                     C.id AS 'member_id',
                     C.messenger_user_id,
