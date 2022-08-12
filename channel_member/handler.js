@@ -1,4 +1,5 @@
-const repo = require("../repository/channel_members")
+const channel_members_history_repo = require("../repository/channel_members_history")
+const channel_members_repo = require("../repository/channel_members")
 const client = require("../client/handler");
 const helper = require("../utils/helper");
 const logger = require("../repository/system_logs")
@@ -8,7 +9,7 @@ const logger = require("../repository/system_logs")
 async function selectHost(channel_id) {
     let channel_members = await getChannelMembers(channel_id)
     if (Object.keys(channel_members).length == 0){
-        await repo.UpdateAllChannelIsActive(channel_id, 1)
+        await channel_members_repo.UpdateAllChannelIsActive(channel_id, 1)
         channel_members = await getChannelMembers(channel_id)
     }
     processChannelMembers(channel_members)
@@ -18,7 +19,7 @@ async function selectHost(channel_id) {
 // filters away the non-active statuses
 // returns a mapped channels with members data populated in each channel object
 async function getChannelMembers(channel_id){
-    let channel_members = await repo.Read(channel_id)
+    let channel_members = await channel_members_repo.Read(channel_id)
 
     let channels = {}
 
@@ -58,8 +59,8 @@ function processChannelMembers(channel_members) {
         let random_member = channel_member.members[Math.floor(Math.random()*channel_member.members.length)];
         capitalized_name = helper.CapitalizeFirstLetter(random_member.name)
         client.Hook(channel_member.hook_base_url, channel_member.hook_path, capitalized_name, random_member.messenger_user_id)
-        repo.UpdateIsActive(channel_id, random_member.id, 0)
-
+        channel_members_repo.UpdateIsActive(channel_id, random_member.id, 0)
+        channel_members_history_repo.Create(channel_id, random_member.id)
         logger.Info("channel_member", "processChannelMembers", "select random member as host for " + channel_member.name + " : " + JSON.stringify(random_member));
     }
 }

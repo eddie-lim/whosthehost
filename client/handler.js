@@ -9,10 +9,9 @@ function hook(base_url, path, member_name, messenger_user_id) {
         "messenger_user_id": messenger_user_id
     })
     .then(function (response) {
-        console.log(response.statusText);
+        logger.Error("client", "hook", "webhook call " + response.statusText);
     })
     .catch(function (error) {
-        console.log("err", error);
         logger.Error("client", "hook", "failed to call webhook: " + JSON.stringify(error));
     });
 }
