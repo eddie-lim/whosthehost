@@ -1,5 +1,5 @@
 # whosthehost
-Tired of finding out who is the host in the rotation for meetings like sprint ceremonies (planning/retrospective/grooming/stand-up) or even team bonding events?
+Tired of finding out who is the host in the rotation for meetings like scrum ceremonies (planning/retrospective/grooming/stand-up) or even team bonding events?
 
 ### Requirement
 - This service will need a webhook to call to tell them who is the host!
