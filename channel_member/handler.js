@@ -1,4 +1,4 @@
-const repo = require("../repository/channel_member")
+const repo = require("../repository/channel_members")
 const client = require("../client/handler");
 const helper = require("../utils/helper");
 const logger = require("../repository/system_logs")

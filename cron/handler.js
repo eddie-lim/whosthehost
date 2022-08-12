@@ -8,7 +8,6 @@ async function setup() {
     channels.filter(channel => channel.is_active).forEach(channel => {
         logger.Info("cron", "setup", "setting up cron job for channel " + channel.name);
         cron.schedule(channel.cron_expression, () => {
-            logger.Info("cron", "webhook", "invoking webhook: Selecting a random host for channel " + channel.name);
             CM.SelectHost(channel.id);
           });
     });
