@@ -2,11 +2,11 @@
   "name": "whosthehost",
   "version": "1.0.0",
   "description": "get to know who is the host",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node ./index.js",
-    "dev": "nodemon ./index.js localhost 8080"
+    "start": "node ./server.js",
+    "dev": "nodemon ./server.js localhost 8080"
   },
   "repository": "git+https://eddie-lim@github.com/eddie-lim/whosthehost.git",
   "author": "eddielimofficial@gmail.com",

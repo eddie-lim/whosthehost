@@ -15,6 +15,7 @@ _Get the most fundamental features out_
 - Query list of names from DB, and randomly pick 1 that has `is_active == true`.
 - POST to webhook with the selected host name
 - Set the selected host `is_active = true`
+- Keep record of who was selected
 - Able to cater to multiple rotation list for different webhook that triggers at different timing
 
 ## Phase 2 (Zen)
