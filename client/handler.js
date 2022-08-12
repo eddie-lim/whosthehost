@@ -3,7 +3,6 @@ const logger = require("../repository/system_logs")
 
 function hook(base_url, path, member_name, messenger_user_id) {
     url = base_url + "/" + path
-    // url = process.env.HOOK_URL
     axios.post(url, {
         "name": member_name,
         "messenger_user_id": messenger_user_id
