@@ -27,7 +27,7 @@ function createLog(class_name, method, type, log) {
             })
         })
 
-        console.log(class_name, method, type, log); 
+        console.log("class_name: " +class_name, ", method: " +method, ", type: " + type, ", log: " + log); 
     });
 }
 
