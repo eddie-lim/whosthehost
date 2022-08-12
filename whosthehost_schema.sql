@@ -1,6 +1,6 @@
 CREATE DATABASE  IF NOT EXISTS `whosthehost` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
 USE `whosthehost`;
--- MySQL dump 10.13  Distrib 8.0.22, for macos10.15 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.30, for macos12 (x86_64)
 --
 -- Host: localhost    Database: whosthehost
 -- ------------------------------------------------------
@@ -64,6 +64,22 @@ CREATE TABLE `channel_members` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Table structure for table `channel_members_history`
+--
+
+DROP TABLE IF EXISTS `channel_members_history`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `channel_members_history` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `channel_id` int NOT NULL DEFAULT '0',
+  `member_id` int NOT NULL,
+  `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Table structure for table `member`
 --
 
@@ -99,7 +115,7 @@ CREATE TABLE `system_logs` (
   `log` text,
   `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -111,4 +127,4 @@ CREATE TABLE `system_logs` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-08-11 14:39:49
+-- Dump completed on 2022-08-12 20:06:32
