@@ -1,6 +1,11 @@
 # whosthehost
 Tired of finding out who is the host in the rotation for meetings like scrum ceremonies (planning/retrospective/grooming/stand-up) or even team bonding events?
 
+This script will randomly pick a member from a list to host the meeting, it will keep a record of it so it doesn’t pick the same person for more than once in a rotation.
+It will send automated reminders via a webhook. 
+After everyone have hosted, the list will be reset.
+
+
 ### Requirement
 - This service will need a webhook to call to tell them who is the host!
 
