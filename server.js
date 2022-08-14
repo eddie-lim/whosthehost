@@ -11,6 +11,6 @@ cron_handler.Setup()
 // --
 
 app.get('/', (req, res) => {
-  res.send('to implemented CMS using react or can try angular. hehe')
+  res.send('to implement CMS using react or can try angular. hehe')
 })
 app.listen(3000)

@@ -40,7 +40,7 @@ async function getChannelMembers(channel_id){
             ]
         }
         if (mapped_members != undefined){
-            channel.members = channel.members.concat(mapped_members)
+            channel.members = [...channel.members, ...mapped_members]
         }
         channels[channel_member.channel_id] = channel
     });
