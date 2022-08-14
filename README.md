@@ -4,8 +4,9 @@ Tired of finding out who is the host in the rotation for meetings like scrum cer
 ### Requirement
 - This service will need a webhook to call to tell them who is the host!
 
-### Limitations
+### Current Limitations
 - Would need to manually restart the service when new channel or existing channel has the cron expression updated. This is to refresh and start the cronjob.
+  - To be updated to use endpoint to trigger refresh
 
 # Phases
 ## Phase 1 (Big Bang)
