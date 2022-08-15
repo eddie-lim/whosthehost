@@ -5,6 +5,22 @@ This script will randomly pick a member from a list to host the meeting, it will
 It will send automated reminders via a webhook. 
 After everyone have hosted, the list will be reset.
 
+# Current Flow
+```mermaid
+  graph TD;
+  A[`node server.js`] --> B;
+  B[query DB for list of active channels] --> C;
+  C[loop through the list of active channels and create cron job] --> D;
+  D([idle until cron triggers]) -.cron triggered.->E;
+  E[query DB to get a list of which members are assigned to this channel] --> F;
+  F(has all the members hosted?) --no--> G;
+  F --yes--> H;
+  H[refresh the list by setting all members as not hosted] --> G;
+  G[randomly selects a member from the list] --> I;
+  I[calls the webhook of the channel] --> J;
+  J[update the selected members as hosted] --> K;
+  K[saves a record in DB of who was select for which channel at what time and date] -.back to idle.-> D;
+```
 
 ### Requirement
 - This service will need a webhook to call to tell them who is the host!
@@ -30,6 +46,7 @@ _Ease of use_
   - manage different channels
   - manage different members
   - manage which member is in which channels
+  - view history of who was selected
 
 # Deployment (AWS)
 1. Duplicate `.env.dist` and rename to just `.env`, populate the values inside accordingly
