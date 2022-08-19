@@ -24,6 +24,10 @@ After everyone have hosted, the list will be reset.
   K[saves a record in DB of who was select for which channel at what time and date] -.back to idle.-> D;
 ```
 
+# Simplified Entity Diagram
+![whosthehost_entity](https://user-images.githubusercontent.com/74946174/185549327-302ecfeb-ed6a-42bf-a2a3-69def81e6518.png)
+
+
 ### Requirement
 - This service will need a webhook to call to tell them who is the host!
 
