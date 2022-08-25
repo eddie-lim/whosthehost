@@ -31,6 +31,7 @@ async function getChannelMembers(channel_id){
             "hook_path": channel_member.hook_path,
             "is_fortnightly": channel_member.is_fortnightly,
             "is_fortnightly_even_week": channel_member.is_fortnightly_even_week,
+            "pick_by_alphabetical": channel_member.pick_by_alphabetical,
             "members" : [
                 {
                     "id": channel_member.member_id,
@@ -56,13 +57,31 @@ function processChannelMembers(channel_members) {
             continue
         }
         logger.Info("channel_member", "selectHost", "eligible channel members: " + JSON.stringify(channel_members));
-        let random_member = channel_member.members[Math.floor(Math.random()*channel_member.members.length)];
-        capitalized_name = helper.CapitalizeFirstLetter(random_member.name)
-        client.Hook(channel_member.hook_base_url, channel_member.hook_path, capitalized_name, random_member.messenger_user_id)
-        channel_members_repo.UpdateIsActive(channel_id, random_member.id, 0)
-        channel_members_history_repo.Create(channel_id, random_member.id)
-        logger.Info("channel_member", "processChannelMembers", "select random member as host for " + channel_member.name + " : " + JSON.stringify(random_member));
+
+        choosen_member = pickMember(channel_member)
+
+        capitalized_name = helper.CapitalizeFirstLetter(choosen_member.name)
+        client.Hook(channel_member.hook_base_url, channel_member.hook_path, capitalized_name, choosen_member.messenger_user_id)
+
+        channel_members_repo.UpdateIsActive(channel_id, choosen_member.id, 0)
+        channel_members_history_repo.Create(channel_id, choosen_member.id)
+        logger.Info("channel_member", "processChannelMembers", "select random member as host for " + channel_member.name + " : " + JSON.stringify(choosen_member));
     }
+}
+
+// pickMember picks a member is the list of active members, according to pick_by_alphabetical.
+// pick_by_alphabetical == true, pick according to pick_by_alphabetical order ascending
+// pick_by_alphabetical == false, pick randomly
+function pickMember(channel_member){
+    var members = channel_member.members
+    if (members.length == 1) {
+        return members[0]
+    }
+    if (channel_member.pick_by_alphabetical) {
+        members.sort((a, b) => a.name.localeCompare(b.name))
+        return members[0]
+    } 
+    return members[Math.floor(Math.random()*members.length)];
 }
 
 

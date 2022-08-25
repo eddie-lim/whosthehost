@@ -29,6 +29,7 @@ function read(channel_id) {
                     B.is_fortnightly,
                     B.is_fortnightly_even_week,
                     B.is_active AS 'is_channel_active',
+                    B.pick_by_alphabetical,
                     C.id AS 'member_id',
                     C.messenger_user_id,
                     C.name AS 'member_name',
