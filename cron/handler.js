@@ -1,14 +1,14 @@
-const repo = require("../repository/channel")
+const repo = require("../repository/event")
 const logger = require("../repository/system_logs")
-const CM = require("./../channel_member/handler")
+const CM = require("./../event_member/handler")
 const cron = require('node-cron');
 
 async function setup() {
-    channels = await repo.ReadAll()
-    channels.filter(channel => channel.is_active).forEach(channel => {
-        logger.Info("cron", "setup", "setting up cron job for channel " + channel.name);
-        cron.schedule(channel.cron_expression, () => {
-            CM.SelectHost(channel.id);
+    events = await repo.ReadAll()
+    events.filter(event => event.is_active).forEach(event => {
+        logger.Info("cron", "setup", "setting up cron job for event " + event.name);
+        cron.schedule(event.cron_expression, () => {
+            CM.SelectHost(event.id);
           });
     });
     logger.Info("cron", "setup", "setup done");

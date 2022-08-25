@@ -11,17 +11,17 @@ After everyone have hosted, the list will be reset.
 ```mermaid
   graph TD;
   A[`node server.js`] --> B;
-  B[query DB for list of active channels] --> C;
-  C[loop through the list of active channels and create cron job] --> D;
+  B[query DB for list of active events] --> C;
+  C[loop through the list of active events and create cron job] --> D;
   D([idle until cron triggers]) -.cron triggered.->E;
-  E[query DB to get a list of which members are assigned to this channel] --> F;
+  E[query DB to get a list of which members are assigned to this event] --> F;
   F(has all the members hosted?) --no--> G;
   F --yes--> H;
   H[refresh the list by setting all members as not hosted] --> G;
   G[randomly selects a member from the list] --> I;
-  I[calls the webhook of the channel] --> J;
+  I[calls the webhook of the event] --> J;
   J[update the selected members as hosted] --> K;
-  K[saves a record in DB of who was select for which channel at what time and date] -.back to idle.-> D;
+  K[saves a record in DB of who was select for which event at what time and date] -.back to idle.-> D;
 ```
 
 # Simplified Entity Diagram
@@ -32,7 +32,7 @@ After everyone have hosted, the list will be reset.
 - This service will need a webhook to call to tell them who is the host!
 
 ### Current Limitations
-- Would need to manually restart the service when new channel or existing channel has the cron expression updated. This is to refresh and start the cronjob.
+- Would need to manually restart the service when new event or existing event has the cron expression updated. This is to refresh and start the cronjob.
   - To be updated to use endpoint to trigger refresh
 
 # Phases
@@ -49,9 +49,9 @@ _Get the most fundamental features out_
 ## Phase 2 (Zen)
 _Ease of use_
 - Have simple UI to
-  - manage different channels
+  - manage different events
   - manage different members
-  - manage which member is in which channels
+  - manage which member is in which events
   - view history of who was selected
 
 # Deployment (AWS)

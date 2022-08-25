@@ -1,7 +1,7 @@
 const express = require('express')
 const app = express()
 require('dotenv').config()
-const CM = require("./channel_member/handler")
+const CM = require("./event_member/handler")
 const cron_handler = require("./cron/handler")
 const logger = require("./repository/system_logs")
 
