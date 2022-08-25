@@ -93,7 +93,7 @@ function pickMember(event, all_event_members){
         members.sort((a, b) => a.name.localeCompare(b.name))
         return [members[0], members[1]]
     } 
-    return [members[Math.floor(Math.random()*members.length)], all_event_members[0]];
+    return [members[Math.floor(Math.random()*members.length)], ""];
 }
 
 
