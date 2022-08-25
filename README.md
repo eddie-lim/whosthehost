@@ -3,7 +3,7 @@ status: prototype
 # whosthehost
 Tired of finding out who is the host in the rotation for meetings like scrum ceremonies (planning/retrospective/grooming/stand-up) or even team bonding events?
 
-This script will randomly pick a member from a list to host the meeting, it will keep a record of it so it doesn’t pick the same person for more than once in a rotation.
+This script will pick a member from a list to host the meeting, it will keep a record of it so it doesn’t pick the same person for more than once in a rotation.
 It will send automated reminders via a webhook. 
 After everyone have hosted, the list will be reset.
 
@@ -18,14 +18,19 @@ After everyone have hosted, the list will be reset.
   F(has all the members hosted?) --no--> G;
   F --yes--> H;
   H[refresh the list by setting all members as not hosted] --> G;
-  G[randomly selects a member from the list] --> I;
-  I[calls the webhook of the event] --> J;
-  J[update the selected members as hosted] --> K;
-  K[saves a record in DB of who was select for which event at what time and date] -.back to idle.-> D;
+  G(to pick randomly or in alphabetical order?)
+  G --randomly--> I
+  G --alphabetical order--> J
+  I[randomly picks a member from the list] --> L;
+  J[sorts by alphabetical order] --> K
+  K[picks the 1st member from the sorted list] --> L
+  L[calls the webhook of the event] --> M;
+  M[update the selected members as hosted] --> N;
+  N[saves a record in DB of who was select for which event at what time and date] -.back to idle.-> D;
 ```
 
 # Simplified Entity Diagram
-![whosthehost_entity](https://user-images.githubusercontent.com/74946174/185549327-302ecfeb-ed6a-42bf-a2a3-69def81e6518.png)
+![whosthehost_entity drawio](https://user-images.githubusercontent.com/74946174/186712200-bd69f085-ff63-42b8-a5e0-a88259993ea2.png)
 
 
 ### Requirement
