@@ -41,7 +41,8 @@ function read(event_id) {
                         LEFT JOIN
                     whosthehost.member AS C ON A.member_id = C.id
                 WHERE
-                    A.event_id = ?;
+                    A.event_id = ?
+                ORDER BY C.name ASC;
             `, [event_id], (err, rows) => {
                 connection.release();
                 if (err){
