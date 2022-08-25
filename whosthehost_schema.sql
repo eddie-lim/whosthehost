@@ -18,13 +18,13 @@ USE `whosthehost`;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `channel`
+-- Table structure for table `event`
 --
 
-DROP TABLE IF EXISTS `channel`;
+DROP TABLE IF EXISTS `event`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `channel` (
+CREATE TABLE `event` (
   `id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
   `cron_expression` varchar(32) NOT NULL,
@@ -40,19 +40,19 @@ CREATE TABLE `channel` (
   `updated_at` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `updated_by` int DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Table structure for table `channel_members`
+-- Table structure for table `event_members`
 --
 
-DROP TABLE IF EXISTS `channel_members`;
+DROP TABLE IF EXISTS `event_members`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `channel_members` (
+CREATE TABLE `event_members` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `channel_id` int NOT NULL,
+  `event_id` int NOT NULL,
   `member_id` int NOT NULL,
   `notes` text,
   `is_active` tinyint(1) DEFAULT '0',
@@ -61,23 +61,23 @@ CREATE TABLE `channel_members` (
   `updated_at` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `updated_by` int DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=65 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=96 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Table structure for table `channel_members_history`
+-- Table structure for table `event_members_history`
 --
 
-DROP TABLE IF EXISTS `channel_members_history`;
+DROP TABLE IF EXISTS `event_members_history`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `channel_members_history` (
+CREATE TABLE `event_members_history` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `channel_id` int NOT NULL DEFAULT '0',
+  `event_id` int NOT NULL DEFAULT '0',
   `member_id` int NOT NULL,
   `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=45 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=48 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -116,7 +116,7 @@ CREATE TABLE `system_logs` (
   `log` text,
   `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=265 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=318 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -128,4 +128,4 @@ CREATE TABLE `system_logs` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-08-25 20:44:13
+-- Dump completed on 2022-08-25 22:22:09
